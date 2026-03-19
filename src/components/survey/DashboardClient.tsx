@@ -73,16 +73,14 @@ export default function DashboardClient({ surveys: initialSurveys }: { surveys: 
             <div key={survey.id} className="card p-4 sm:p-5">
               {/* Ligne 1 : titre + badges */}
               <div className="flex items-start justify-between gap-2 mb-2">
-                <div className="flex items-start gap-2 flex-wrap min-w-0">
-                  <h3 className="font-semibold text-zinc-900 text-sm leading-snug">{survey.title}</h3>
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    {survey.isActive
-                      ? <span className="badge-green"><CircleCheck className="w-3 h-3" /> Actif</span>
-                      : <span className="badge-zinc"><CircleSlash className="w-3 h-3" /> Fermé</span>}
-                    {survey.isAnonymous
-                      ? <span className="badge-amber"><Lock className="w-3 h-3" /> Anonyme</span>
-                      : <span className="badge-blue"><User className="w-3 h-3" /> Nominatif</span>}
-                  </div>
+                <h3 className="font-semibold text-zinc-900 text-sm leading-snug flex-1 min-w-0">{survey.title}</h3>
+                <div className="flex items-center gap-1.5 flex-none flex-wrap justify-end">
+                  {survey.isActive
+                    ? <span className="badge-green"><CircleCheck className="w-3 h-3" /> Actif</span>
+                    : <span className="badge-zinc"><CircleSlash className="w-3 h-3" /> Fermé</span>}
+                  {survey.isAnonymous
+                    ? <span className="badge-amber"><Lock className="w-3 h-3" /> Anonyme</span>
+                    : <span className="badge-blue"><User className="w-3 h-3" /> Nominatif</span>}
                 </div>
               </div>
 
