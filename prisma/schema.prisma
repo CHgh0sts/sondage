@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  surveys   Survey[]
+  responses Response[]
+}
+
+model Survey {
+  id          String   @id @default(cuid())
+  shortId     String   @unique @db.VarChar(5)
+  title       String
+  description String?
+  isAnonymous Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creatorId String
+  creator   User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  questions Question[]
+  responses Response[]
+}
+
+model Question {
+  id            String  @id @default(cuid())
+  surveyId      String
+  text          String
+  type          String  // SINGLE | MULTIPLE | FREE_TEXT
+  order         Int
+  required      Boolean @default(true)
+  allowFreeText Boolean @default(false)
+
+  // Logique conditionnelle : afficher cette question seulement si...
+  conditionalQuestionId String?
+  conditionalAnswerId   String?
+
+  survey              Survey         @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  conditionalQuestion Question?      @relation("ConditionalLogic", fields: [conditionalQuestionId], references: [id])
+  dependentQuestions  Question[]     @relation("ConditionalLogic")
+  conditionalAnswer   AnswerOption?  @relation("ConditionalAnswer", fields: [conditionalAnswerId], references: [id])
+
+  options AnswerOption[] @relation("QuestionOptions")
+  answers Answer[]
+}
+
+model AnswerOption {
+  id         String @id @default(cuid())
+  questionId String
+  text       String
+  order      Int
+
+  question Question  @relation("QuestionOptions", fields: [questionId], references: [id], onDelete: Cascade)
+  answers  Answer[]
+
+  conditionFor Question[] @relation("ConditionalAnswer")
+}
+
+model Response {
+  id             String   @id @default(cuid())
+  surveyId       String
+  userId         String?
+  anonymousToken String?
+  respondentName String?  // Nom renseigné manuellement (sondage non-anonyme sans compte)
+  completedAt    DateTime @default(now())
+
+  survey  Survey   @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  user    User?    @relation(fields: [userId], references: [id])
+  answers Answer[]
+}
+
+model Answer {
+  id             String  @id @default(cuid())
+  responseId     String
+  questionId     String
+  answerOptionId String?
+  freeText       String?
+
+  response     Response      @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  question     Question      @relation(fields: [questionId], references: [id])
+  answerOption AnswerOption? @relation(fields: [answerOptionId], references: [id])
+}
