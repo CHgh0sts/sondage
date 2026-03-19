@@ -107,8 +107,8 @@ export default function DashboardClient({ surveys: initialSurveys }: { surveys: 
 
               {/* Ligne 3 : lien court + actions */}
               <div className="flex items-center justify-between gap-2 flex-wrap">
-                {/* Lien */}
-                <div className="flex items-center gap-1">
+                {/* Lien — masqué sur mobile */}
+                <div className="hidden sm:flex items-center gap-1">
                   <code className="text-xs bg-zinc-50 border border-zinc-200 text-zinc-600 px-2 py-1 rounded font-mono">
                     /s/{survey.shortId}
                   </code>
