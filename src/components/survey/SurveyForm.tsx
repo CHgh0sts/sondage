@@ -291,7 +291,7 @@ export default function SurveyForm({ survey, currentUser }: Props) {
               <p className="text-xs text-zinc-500">Ce sondage est nominatif — votre nom sera visible du créateur.</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="label">Prénom <span className="text-red-500">*</span></label>
               <input type="text" className="input" value={firstName} onChange={(e) => setFirstName(e.target.value)}
@@ -340,7 +340,7 @@ export default function SurveyForm({ survey, currentUser }: Props) {
           {currentQuestion.type === 'SINGLE' && (() => {
             const a = answers[currentQuestion.id]
             return (
-              <div className="space-y-2 pl-8">
+              <div className="space-y-2 pl-5 sm:pl-8">
                 {currentQuestion.options.map((opt) => {
                   const sel = a.selectedOptionId === opt.id
                   return (
@@ -373,7 +373,7 @@ export default function SurveyForm({ survey, currentUser }: Props) {
           {currentQuestion.type === 'MULTIPLE' && (() => {
             const a = answers[currentQuestion.id]
             return (
-              <div className="space-y-2 pl-8">
+              <div className="space-y-2 pl-5 sm:pl-8">
                 {currentQuestion.options.map((opt) => {
                   const sel = a.selectedOptionIds.has(opt.id)
                   return (
@@ -404,7 +404,7 @@ export default function SurveyForm({ survey, currentUser }: Props) {
 
           {/* FREE TEXT */}
           {currentQuestion.type === 'FREE_TEXT' && (
-            <div className="pl-8">
+            <div className="pl-5 sm:pl-8">
               <textarea className="input resize-none" rows={4} value={answers[currentQuestion.id].freeText}
                 onChange={(e) => updateFreeText(currentQuestion.id, e.target.value)} placeholder="Votre réponse…" />
             </div>
@@ -465,25 +465,25 @@ export default function SurveyForm({ survey, currentUser }: Props) {
       )}
 
       {/* ── Navigation ─────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between gap-3 pt-1">
+      <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-2 pt-1">
         {/* Bouton précédent */}
         {currentStep !== initialStep ? (
-          <button type="button" onClick={goPrev} className="btn-secondary btn-sm">
+          <button type="button" onClick={goPrev} className="btn-secondary w-full sm:w-auto">
             <ChevronLeft className="w-4 h-4" />
             Précédent
           </button>
         ) : (
-          <div />
+          <div className="hidden sm:block" />
         )}
 
         {/* Bouton suivant / soumettre */}
         {currentStep === 'summary' ? (
-          <button type="button" onClick={handleSubmit} disabled={submitting} className="btn-primary">
+          <button type="button" onClick={handleSubmit} disabled={submitting} className="btn-primary w-full sm:w-auto">
             <Send className="w-4 h-4" />
             {submitting ? 'Envoi…' : 'Valider et envoyer'}
           </button>
         ) : (
-          <button type="button" onClick={goNext} className="btn-primary">
+          <button type="button" onClick={goNext} className="btn-primary w-full sm:w-auto">
             {typeof currentStep === 'number' && currentStep === totalSteps - 1 ? 'Voir le récapitulatif' : 'Suivant'}
             {!(typeof currentStep === 'number' && currentStep === totalSteps - 1) && <ChevronRight className="w-4 h-4" />}
           </button>

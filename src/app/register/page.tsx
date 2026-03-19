@@ -40,7 +40,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="border-b border-zinc-200 px-6 h-14 flex items-center">
+      <header className="border-b border-zinc-200 px-4 sm:px-6 h-14 flex items-center">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-7 h-7 bg-zinc-900 rounded-md flex items-center justify-center">
             <ClipboardList className="w-4 h-4 text-white" />

@@ -37,19 +37,19 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <header className="bg-white border-b border-zinc-200 px-6 h-14 flex items-center gap-3 sticky top-0 z-10">
-        <Link href="/dashboard" className="flex items-center gap-2">
+      <header className="bg-white border-b border-zinc-200 px-4 sm:px-6 h-14 flex items-center gap-2 sm:gap-3 sticky top-0 z-10 min-w-0">
+        <Link href="/dashboard" className="flex items-center gap-2 flex-none">
           <div className="w-7 h-7 bg-zinc-900 rounded-md flex items-center justify-center">
             <ClipboardList className="w-4 h-4 text-white" />
           </div>
-          <span className="font-semibold text-zinc-900 text-sm">Sondage</span>
+          <span className="font-semibold text-zinc-900 text-sm hidden sm:block">Sondage</span>
         </Link>
-        <span className="text-zinc-300 text-sm">/</span>
-        <Link href="/dashboard" className="text-sm text-zinc-500 hover:text-zinc-800 transition-colors">
+        <span className="text-zinc-300 text-sm hidden sm:block">/</span>
+        <Link href="/dashboard" className="text-sm text-zinc-500 hover:text-zinc-800 transition-colors hidden sm:block">
           Dashboard
         </Link>
-        <span className="text-zinc-300 text-sm">/</span>
-        <span className="text-sm text-zinc-700 truncate max-w-[200px]">{survey.title}</span>
+        <span className="text-zinc-300 text-sm hidden sm:block">/</span>
+        <span className="text-sm text-zinc-700 truncate">{survey.title}</span>
       </header>
 
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -179,11 +179,11 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
                               {freeAnswers.map((a) => (
                                 <div
                                   key={a.id}
-                                  className="text-xs text-zinc-600 bg-zinc-50 border border-zinc-200 px-3 py-2 rounded-md flex items-center justify-between gap-4"
+                                  className="text-xs text-zinc-600 bg-zinc-50 border border-zinc-200 px-3 py-2 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4"
                                 >
                                   <span>&ldquo;{a.freeText}&rdquo;</span>
                                   {!survey.isAnonymous && (a.response.user || a.response.respondentName) && (
-                                    <span className="text-zinc-400 shrink-0">
+                                    <span className="text-zinc-400 sm:shrink-0">
                                       {a.response.respondentName ?? a.response.user?.name}
                                     </span>
                                   )}
@@ -205,11 +205,11 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
                         q.answers.map((a) => (
                           <div
                             key={a.id}
-                            className="text-sm text-zinc-700 bg-zinc-50 border border-zinc-200 px-3 py-2.5 rounded-md flex items-start justify-between gap-4"
+                            className="text-sm text-zinc-700 bg-zinc-50 border border-zinc-200 px-3 py-2.5 rounded-md flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4"
                           >
                             <span className="leading-relaxed">&ldquo;{a.freeText}&rdquo;</span>
                             {!survey.isAnonymous && (a.response.user || a.response.respondentName) && (
-                              <span className="text-xs text-zinc-400 shrink-0 mt-0.5">
+                              <span className="text-xs text-zinc-400 sm:shrink-0 sm:mt-0.5">
                                 {a.response.respondentName ?? a.response.user?.name}
                               </span>
                             )}

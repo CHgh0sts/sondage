@@ -10,18 +10,18 @@ export default async function CreateSurveyPage() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <header className="bg-white border-b border-zinc-200 px-6 h-14 flex items-center justify-between sticky top-0 z-10">
-        <div className="flex items-center gap-3">
-          <Link href="/dashboard" className="flex items-center gap-2">
+      <header className="bg-white border-b border-zinc-200 px-4 sm:px-6 h-14 flex items-center justify-between sticky top-0 z-10">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <Link href="/dashboard" className="flex items-center gap-2 flex-none">
             <div className="w-7 h-7 bg-zinc-900 rounded-md flex items-center justify-center">
               <ClipboardList className="w-4 h-4 text-white" />
             </div>
-            <span className="font-semibold text-zinc-900 text-sm">Sondage</span>
+            <span className="font-semibold text-zinc-900 text-sm hidden sm:block">Sondage</span>
           </Link>
-          <span className="text-zinc-300">/</span>
-          <span className="text-sm text-zinc-500">Nouveau sondage</span>
+          <span className="text-zinc-300 hidden sm:block">/</span>
+          <span className="text-sm text-zinc-500 truncate">Nouveau sondage</span>
         </div>
-        <span className="text-sm text-zinc-400 hidden sm:block">{user.name}</span>
+        <span className="text-sm text-zinc-400 hidden md:block truncate max-w-[160px]">{user.name}</span>
       </header>
 
       <div className="max-w-2xl mx-auto px-4 py-8">

@@ -3,6 +3,10 @@
 @layer base {
   * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
   }
   body {
     background-color: #f9fafb;
@@ -90,5 +94,12 @@
   .badge-amber {
     @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium
            bg-amber-50 text-amber-700 border border-amber-200;
+  }
+}
+
+/* Évite le zoom automatique sur iOS lors du focus d'un input (font-size < 16px le déclenche) */
+@media screen and (max-width: 640px) {
+  .input, select {
+    font-size: 16px !important;
   }
 }

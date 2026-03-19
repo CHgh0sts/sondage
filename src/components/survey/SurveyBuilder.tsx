@@ -261,11 +261,11 @@ export default function SurveyBuilder({ initialData }: Props) {
             <p className="text-sm text-red-700 mb-4">
               Les {responseCount} réponse{responseCount > 1 ? 's' : ''} seront supprimées définitivement et ne pourront pas être récupérées.
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 type="button"
                 onClick={() => { setConfirmEdit(false) }}
-                className="btn-secondary btn-sm"
+                className="btn-secondary btn-sm w-full sm:w-auto"
               >
                 Annuler
               </button>
@@ -273,7 +273,7 @@ export default function SurveyBuilder({ initialData }: Props) {
                 type="button"
                 onClick={submit}
                 disabled={saving}
-                className="btn-danger btn-sm"
+                className="btn-danger btn-sm w-full sm:w-auto"
               >
                 {saving ? 'Sauvegarde…' : 'Confirmer et sauvegarder'}
               </button>
@@ -487,9 +487,9 @@ export default function SurveyBuilder({ initialData }: Props) {
                     <GitBranch className="w-3.5 h-3.5 text-zinc-400" />
                     Condition d&apos;affichage
                   </div>
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-col gap-2">
                     <select
-                      className="input w-auto py-1.5 text-xs bg-white"
+                      className="input py-1.5 text-xs bg-white"
                       value={q.conditionalQuestionTempId || ''}
                       onChange={(e) =>
                         updateQuestion(qIdx, {
@@ -507,16 +507,16 @@ export default function SurveyBuilder({ initialData }: Props) {
                     </select>
 
                     {condQ && (
-                      <>
-                        <span className="text-xs text-zinc-500">répond</span>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span className="text-xs text-zinc-500">répond :</span>
                         <select
-                          className="input w-auto py-1.5 text-xs bg-white"
+                          className="input py-1.5 text-xs bg-white"
                           value={q.conditionalOptionTempId || ''}
                           onChange={(e) =>
                             updateQuestion(qIdx, { conditionalOptionTempId: e.target.value || null })
                           }
                         >
-                          <option value="">— choisir —</option>
+                          <option value="">— choisir une réponse —</option>
                           {condQ.options
                             .filter((o) => o.text.trim())
                             .map((o) => (
@@ -525,7 +525,7 @@ export default function SurveyBuilder({ initialData }: Props) {
                               </option>
                             ))}
                         </select>
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -553,15 +553,15 @@ export default function SurveyBuilder({ initialData }: Props) {
 
       {/* Actions — masquées quand la confirmation est affichée */}
       {!confirmEdit && (
-        <div className="flex justify-end gap-3 pt-2">
-          <button type="button" onClick={() => router.back()} className="btn-secondary">
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-2">
+          <button type="button" onClick={() => router.back()} className="btn-secondary w-full sm:w-auto">
             Annuler
           </button>
           <button
             type="button"
             onClick={handleSubmit}
             disabled={saving}
-            className="btn-primary px-5"
+            className="btn-primary w-full sm:w-auto px-5"
           >
             {saving
               ? 'Sauvegarde…'

@@ -43,7 +43,7 @@ export default async function SurveyResponsePage({
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <header className="bg-white border-b border-zinc-200 px-6 h-12 flex items-center">
+      <header className="bg-white border-b border-zinc-200 px-4 sm:px-6 h-12 flex items-center">
         <Link href="/" className="flex items-center gap-1.5">
           <div className="w-6 h-6 bg-zinc-900 rounded flex items-center justify-center">
             <ClipboardList className="w-3.5 h-3.5 text-white" />
@@ -52,9 +52,9 @@ export default async function SurveyResponsePage({
         </Link>
       </header>
 
-      <div className="max-w-xl mx-auto px-4 py-10">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-900 tracking-tight leading-tight">
+      <div className="max-w-xl mx-auto px-4 py-6 sm:py-10">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight leading-tight">
             {survey.title}
           </h1>
           {survey.description && (
